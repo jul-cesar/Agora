@@ -9,6 +9,19 @@
 .idea/shelf
 agora-backend/scraper-service/.venv
 
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+agora-front/node_modules
+agora-front/dist
+agora-front/dist-ssr
+agora-front/*.local
+
 # deps
 agora-backend/node_modules/
 

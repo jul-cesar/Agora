@@ -8,7 +8,7 @@ Inspirado en la **plaza pública de la antigua Grecia**, Ágora busca ser un esp
 
 ## ✨ Características
 
-- 🔎 **Scraping con Puppeteer**: obtiene noticias de sitios públicos y gratuitos.  
+- 🔎 **Scraping con Crawl4ai**: obtiene noticias de sitios públicos y gratuitos.  
 - 🧠 **Clasificación política**: usa reglas y/o modelos de IA (OpenAI API u otros).  
 - 👤 **Gestión de usuarios**: registro con nombre, alias, correo y afinidad política.  
 - 📬 **Envío de correos**: boletines personalizados con **Resend**.  
@@ -20,7 +20,7 @@ Inspirado en la **plaza pública de la antigua Grecia**, Ágora busca ser un esp
 ## 🛠️ Tecnologías
 
 - [Hono.js](https://hono.dev/) → Framework ultraligero para APIs en Node.js.  
-- [Puppeteer](https://pptr.dev/) → Scraping con navegador real.  
+- [Crawl4ai](https://docs.crawl4ai.com/core/simple-crawling/) → Scraping
 - [Resend](https://resend.com/) → Envío de correos transaccionales.  
 - [OpenAI API](https://platform.openai.com/) (opcional) → Clasificación avanzada de noticias.  
 - [node-cron](https://www.npmjs.com/package/node-cron) → Programación de tareas.  

@@ -10,7 +10,7 @@ export const NewsTable = pgTable("news", {
   body: text("body").notNull(),
   url: text("url").notNull(),
   imageUrl: text("imageUrl").notNull(),
-  publishedAt: timestamp("publishedAt").notNull(),
+  publishedAt: text("publishedAt").notNull(),
   sourceName: text("sourceName").notNull(),
   category: text("category").notNull(),
   PoliticOrientation: text("PoliticOrientation").notNull(),

@@ -10,13 +10,18 @@ export async function scrapeElEspectador(url: string[]) {
     console.log("🌐 Iniciando scraping en:", singleUrl);
     const browser = await puppeteer.launch({
       args: [
-        "--no-sandbox", // Necesario para Docker (seguridad)
-        "--disable-setuid-sandbox", // Necesario para Docker (seguridad)
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
         "--disable-gpu",
-        "--disable-dev-shm-usage", // Resuelve problemas de memoria en Docker
-        "--single-process", // Para Alpine, ayuda a reducir el consumo de recursos
+        "--disable-dev-shm-usage",
+        "--single-process",
+        "--disable-setuid-sandbox",
+        "--disable-gpu",
+        "--disable-dev-shm-usage",
+
+        "--disable-site-isolation-trials",
+        "--disable-blink-features=AutomationControlled",
       ],
-      executablePath: "/usr/bin/chromium-browser",
     });
 
     const page = await browser.newPage();
@@ -53,16 +58,24 @@ export async function scrapeElEspectador(url: string[]) {
       try {
         await page.goto(link, {
           waitUntil: "domcontentloaded",
-          timeout: 20000,
+          timeout: 60000,
         });
 
         await page.waitForSelector(".ArticleHeader-Title", { timeout: 10000 });
-
+        await page.waitForSelector(".ArticleHeader-Author > a", {
+          timeout: 5000,
+        });
+        await page.waitForSelector(".ArticleHeader-Date", { timeout: 10000 });
+        await page.waitForSelector(".ImageArticle-Image", { timeout: 10000 });
+        await page.waitForSelector(".Article-Content p.font--secondary", {
+          timeout: 10000,
+        });
         const article = await page.evaluate(() => {
           const title =
             document
               .querySelector(".ArticleHeader-Title")
               ?.textContent?.trim() || null;
+
           const author =
             document
               .querySelector(".ArticleHeader-Author > a")
@@ -88,19 +101,24 @@ export async function scrapeElEspectador(url: string[]) {
 
         if (article && article.title) {
           noticias.push({
-            body: article.content || "No content",
-            title: article.title || "No title",
+            body: article.content ? article.content : "No content",
+            title: article.title ? article.title : "No title",
             url: link,
-            imageUrl: article.image || "No image",
-            category: link.split("/")[1] || "general",
+            imageUrl: article.image ? article.image : "No image",
+            category: link.split("/")[1] ? link.split("/")[1] : "general",
             PoliticOrientation: await generatePoliticOrientationWithLLM(
               article.title,
               article.content
             ),
             sourceName: "El Espectador",
-            publishedAt: article.date ? new Date(article.date) : new Date(),
+            publishedAt: article.date ? article.date : "",
           });
-          console.log("📰 Extraído:", article.title);
+          console.log(
+            "📰 Extraído:",
+            article.title,
+            article.date,
+            article.image
+          );
         }
       } catch (error) {
         console.error("⚠️ Error en", link, error);

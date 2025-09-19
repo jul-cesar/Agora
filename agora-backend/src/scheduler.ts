@@ -4,7 +4,7 @@ import { getLatestNews } from "./services/news-services.js";
 import { getAllUsers } from "./services/usuarios-service.js";
 import { sendEmail } from "./utils.js";
 
-cron.schedule("27 2 * * *", async () => {
+cron.schedule("47 12 * * *", async () => {
   console.log("⏰ Ejecutando envío de boletines...");
 
   console.log("⏳ Iniciando scrapeo de noticias...");

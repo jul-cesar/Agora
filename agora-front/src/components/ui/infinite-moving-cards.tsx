@@ -1,6 +1,6 @@
 "use client";
 
-import { cn, formarDate } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
 export const InfiniteMovingCards = ({
   items,
@@ -19,7 +19,7 @@ export const InfiniteMovingCards = ({
     sourceName: string;
     category: string;
     PoliticOrientation: string;
-    createdAt: string;
+    createdAt: Date;
   }[];
   direction?: "left" | "right";
   speed?: "fast" | "normal" | "slow";
@@ -129,7 +129,7 @@ export const InfiniteMovingCards = ({
                       {item.sourceName}
                     </span>
                     <span className="text-xs leading-[1.6] font-normal text-neutral-500 dark:text-gray-400">
-                      {formarDate(item.publishedAt)}
+                      {item.publishedAt}
                     </span>
                   </span>
 

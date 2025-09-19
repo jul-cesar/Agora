@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   db:
@@ -39,10 +39,16 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 2G # Intenta con 1GB, 2GB, 4GB según tu RAM disponible
+        reservations:
+          memory: 1G # Reserva al menos 512MB
 
   frontend:
     build:
-      context:  ./agora-front # Sigue siendo la raíz para que el frontend Dockerfile pueda ver nginx.conf
+      context: ./agora-front
       dockerfile: Dockerfile
     container_name: agora_frontend
     restart: always

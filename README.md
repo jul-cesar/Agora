@@ -171,25 +171,6 @@ pnpm run dev      # Servidor en http://localhost:5173
 - **Centro-derecha**: Posiciones moderadas con tendencia conservadora
 - **Derecha**: Contenido conservador y de derecha
 
-## 🌐 Despliegue en Producción
-
-### Con Docker Compose
-```bash
-# Producción
-docker-compose -f docker-compose.prod.yml up -d
-
-# Revisar logs
-docker-compose logs -f
-```
-
-### Variables de Entorno Producción
-```env
-NODE_ENV=production
-DATABASE_URL=postgresql://user:password@tu-db-host:5432/agora_db
-FRONTEND_URL=https://tu-dominio.com
-BACKEND_URL=https://api.tu-dominio.com
-```
-
 ## 🤝 Contribuir
 
 1. Fork el proyecto
@@ -198,29 +179,10 @@ BACKEND_URL=https://api.tu-dominio.com
 4. Push a la rama (`git push origin feature/AmazingFeature`)
 5. Abre un Pull Request
 
-## 📋 Roadmap
-
-- [ ] Sistema de preferencias avanzadas por temas
-- [ ] API pública para desarrolladores
-- [ ] Aplicación móvil (React Native)
-- [ ] Dashboard de administración
-- [ ] Métricas y analytics
-- [ ] Soporte para más países de LATAM
-- [ ] Sistema de notificaciones push
-- [ ] Chat/comentarios comunitarios
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para más detalles.
-
 ## 👥 Equipo
 
 - **Desarrollador Principal**: [@jul-cesar](https://github.com/jul-cesar)
-
-## 📞 Soporte
-
-- **Issues**: [GitHub Issues](https://github.com/jul-cesar/Agora/issues)
-- **Documentación**: [Wiki del Proyecto](https://github.com/jul-cesar/Agora/wiki)
+- **Desarrollador**: [@aks-alx](https://github.com/aks-alx)
 
 ---
 

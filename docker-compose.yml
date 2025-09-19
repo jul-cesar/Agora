@@ -39,12 +39,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    deploy:
-      resources:
-        limits:
-          memory: 2G # Intenta con 1GB, 2GB, 4GB según tu RAM disponible
-        reservations:
-          memory: 1G # Reserva al menos 512MB
+    
 
   frontend:
     build:

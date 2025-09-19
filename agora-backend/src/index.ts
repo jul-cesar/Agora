@@ -16,6 +16,8 @@ app.get("/", (c) => {
   return c.json({ message: "API de Agora funcionando" });
 });
 
+const scheduleTime = process.env.NEWS_DISPATCH_TIME 
+
 app.post("/users", userValidator, async (c) => {
   try {
     const data = await c.req.json<InsertUser>();
@@ -59,6 +61,6 @@ serve(
     port: 3000,
   },
   (info) => {
-    console.log(`Server is running on http://localhost:${info.port}`);
+    console.log(`Server is running on http://localhost:${info.port}. Scrape y envio de noticias a las ${scheduleTime}`);
   }
 );

@@ -1,5 +1,5 @@
 export const getLatestNews = async () => {
-    const response = await fetch("http://localhost:3000/api/agora/news");
+    const response = await fetch("/api/agora/news");
     if (!response.ok) {
         throw new Error("Failed to fetch news");
     }

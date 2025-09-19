@@ -62,7 +62,7 @@ const RegisterForm = () => {
 
     try {
       console.log(data);
-      const response = await fetch("http://localhost:3000/api/agora/users", {
+      const response = await fetch("/api/agora/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

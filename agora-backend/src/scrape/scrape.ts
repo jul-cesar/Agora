@@ -9,19 +9,7 @@ export async function scrapeElEspectador(url: string[]) {
   for (const singleUrl of url) {
     console.log("🌐 Iniciando scraping en:", singleUrl);
     const browser = await puppeteer.launch({
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-gpu",
-        "--disable-dev-shm-usage",
-        "--single-process",
-        "--disable-setuid-sandbox",
-        "--disable-gpu",
-        "--disable-dev-shm-usage",
-
-        "--disable-site-isolation-trials",
-        "--disable-blink-features=AutomationControlled",
-      ],
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
 
     const page = await browser.newPage();
@@ -61,14 +49,14 @@ export async function scrapeElEspectador(url: string[]) {
           timeout: 60000,
         });
 
-        await page.waitForSelector(".ArticleHeader-Title", { timeout: 10000 });
+        await page.waitForSelector(".ArticleHeader-Title", { timeout: 1000 });
         await page.waitForSelector(".ArticleHeader-Author > a", {
           timeout: 5000,
         });
-        await page.waitForSelector(".ArticleHeader-Date", { timeout: 10000 });
-        await page.waitForSelector(".ImageArticle-Image", { timeout: 10000 });
+        await page.waitForSelector(".ArticleHeader-Date", { timeout: 1000 });
+        await page.waitForSelector(".ImageArticle-Image", { timeout: 1000 });
         await page.waitForSelector(".Article-Content p.font--secondary", {
-          timeout: 10000,
+          timeout: 1000,
         });
         const article = await page.evaluate(() => {
           const title =

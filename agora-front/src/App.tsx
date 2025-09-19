@@ -181,29 +181,23 @@ export default function HomePage() {
               ¿Cómo funciona?
             </h2>
             <p className="text-lg text-muted-foreground">
-              En solo 3 pasos estarás recibiendo noticias personalizadas
+              En solo 2 pasos estarás recibiendo noticias personalizadas
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {[
               {
                 step: "1",
                 title: "Regístrate",
                 description:
-                  "Crea tu cuenta con tu email y selecciona tu orientación política",
+                  "Ingresa tu email válido y crea tu cuenta",
               },
               {
                 step: "2",
-                title: "Personaliza",
+                title: "Recibe noticias",
                 description:
-                  "Elige los temas que más te interesan: economía, seguridad, educación, etc.",
-              },
-              {
-                step: "3",
-                title: "Recibe",
-                description:
-                  "Obtén un resumen diario personalizado en tu correo electrónico",
+                  "¡Listo! Empezarás a recibir noticias personalizadas automáticamente",
               },
             ].map((item, index) => (
               <motion.div

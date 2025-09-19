@@ -90,7 +90,7 @@ export default function HomePage() {
               <InfiniteMovingCards
                 items={newsData?.news || []}
                 direction="right"
-                speed="fast"
+                speed="normal"
               />
             </div>
           )}

@@ -77,7 +77,7 @@ export const ModalBody = ({
     }
   }, [open]);
 
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
   const { setOpen } = useModal();
   useOutsideClick(modalRef, () => setOpen(false));
 
@@ -98,8 +98,6 @@ export const ModalBody = ({
           }}
           className="fixed [perspective:800px] [transform-style:preserve-3d] inset-0 h-full w-full  flex items-center justify-center z-50"
         >
-          <Overlay />
-
           <motion.div
             ref={modalRef}
             className={cn(
@@ -171,24 +169,24 @@ export const ModalFooter = ({
   );
 };
 
-const Overlay = ({ className }: { className?: string }) => {
-  return (
-    <motion.div
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-        backdropFilter: "blur(10px)",
-      }}
-      exit={{
-        opacity: 0,
-        backdropFilter: "blur(0px)",
-      }}
-      className={`fixed inset-0 h-full w-full  z-50 ${className}`}
-    ></motion.div>
-  );
-};
+// const Overlay = ({ className }: { className?: string }) => {
+//   return (
+//     <motion.div
+//       initial={{
+//         opacity: 0,
+//       }}
+//       animate={{
+//         opacity: 1,
+//         backdropFilter: "blur(10px)",
+//       }}
+//       exit={{
+//         opacity: 0,
+//         backdropFilter: "blur(0px)",
+//       }}
+//       className={`fixed inset-0 h-full w-full  z-50 ${className}`}
+//     ></motion.div>
+//   );
+// };
 
 const CloseIcon = () => {
   const { setOpen } = useModal();
@@ -220,11 +218,12 @@ const CloseIcon = () => {
 // Hook to detect clicks outside of a component.
 // Add it in a separate file, I've added here for simplicity
 export const useOutsideClick = (
-  ref: React.RefObject<HTMLDivElement>,
+  ref: React.RefObject<HTMLDivElement | null>,
   callback: Function
 ) => {
   useEffect(() => {
     const listener = (event: any) => {
+      if (!ref || !ref.current) return;
       // DO NOTHING if the element being clicked is the target element or their children
       if (!ref.current || ref.current.contains(event.target)) {
         return;

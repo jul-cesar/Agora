@@ -1,0 +1,21 @@
+# Ignore Node.js modules for frontend
+node_modules/
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Ignore build artifacts
+build/
+dist/
+
+# Ignore local environment variables
+.env
+.env.local
+
+# Ignore editor and OS files
+.vscode
+.idea
+.DS_Store
+*.swp
+*.bak
+*~

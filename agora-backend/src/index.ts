@@ -3,24 +3,29 @@ import { desc, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { db } from "./db/index.js";
-import { NewsTable, usersTable, type InsertUser } from "./db/schema.js";
+import { NewsTable, UsersTable, type InsertUser } from "./db/schema.js";
+import "./scheduler.js";
 import { userValidator } from "./validate.js";
-
 const app = new Hono().basePath("/api/agora");
 
 app.use("*", cors({
   origin: "*"
 }));
 
+app.get("/", (c) => {
+  return c.json({ message: "API de Agora funcionando" });
+});
+
 app.post("/users", userValidator, async (c) => {
   try {
     const data = await c.req.json<InsertUser>();
     console.log(data);
-    const user = await db.select().from(usersTable).where(eq(usersTable.email, data.email)).get();
+    const users = await db.select().from(UsersTable).where(eq(UsersTable.email, data.email)).limit(1);
+    const user = users[0];
     if (user) {
       return c.json({ message: "El usuario ya existe" }, { status: 409 });
     }
-    const ins = await db.insert(usersTable).values(data);
+    const ins = await db.insert(UsersTable).values(data);
     if(!ins) {
       return c.json({ message: "Error al registrar el usuario" }, { status: 500 });
     }
@@ -34,8 +39,8 @@ app.post("/users", userValidator, async (c) => {
 
 app.get("/news", async (c) => {
   try {
-    const news = await db.select().from(NewsTable).orderBy(desc(NewsTable.publishedAt)).limit(20).all();
-    if (!news) {
+    const news = await db.select().from(NewsTable).orderBy(desc(NewsTable.publishedAt)).limit(20);
+    if (!news || news.length === 0) {
       return c.json({ message: "No hay noticias" }, { status: 404 });
     }
     return c.json({ news });
@@ -45,6 +50,8 @@ app.get("/news", async (c) => {
   }
   
 });
+
+
 
 serve(
   {

@@ -26,6 +26,7 @@ agora-front/*.local
 agora-backend/node_modules/
 
 # env
+.env
 agora-backend/.env
 agora-backend/.env.production
 

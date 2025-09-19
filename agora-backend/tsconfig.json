@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    
     "module": "NodeNext",
     "strict": true,
     "verbatimModuleSyntax": true,
@@ -8,9 +9,10 @@
     "types": [
       "node"
     ],
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
+     "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "outDir": "./dist"
   },
   "exclude": ["node_modules"]
 }
+  

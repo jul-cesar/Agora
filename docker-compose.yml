@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: agora_db
+    restart: always
+    environment:
+      POSTGRES_DB: agora_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d agora_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./agora-backend
+      dockerfile: Dockerfile
+    container_name: agora_backend
+    restart: always
+    environment:
+      - TZ=America/Bogota
+    env_file:
+      - ./.env
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context:  ./agora-front # Sigue siendo la raíz para que el frontend Dockerfile pueda ver nginx.conf
+      dockerfile: Dockerfile
+    container_name: agora_frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_started
+
+volumes:
+  db_data:

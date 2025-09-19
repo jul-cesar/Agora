@@ -1,8 +1,10 @@
 import "dotenv/config";
-import { drizzle } from "drizzle-orm/libsql";
-export const db = drizzle({
-  connection: {
-    url: process.env.TURSO_DATABASE_URL!,
-    authToken: process.env.TURSO_AUTH_TOKEN!,
-  },
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
+import * as schema from "./schema.js";
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL!,
 });
+
+export const db = drizzle(pool, { schema });

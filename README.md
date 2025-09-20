@@ -78,23 +78,11 @@ cd Agora
 Crea un archivo `.env` en la raíz del proyecto:
 
 ```env
-# Base de datos PostgreSQL
-POSTGRES_DB=agora_db
-POSTGRES_USER=user
-POSTGRES_PASSWORD=password
-DATABASE_URL=postgresql://user:password@db:5432/agora_db
+GOOGLE_API_KEY=your-google-api-key
+RESEND_API_KEY=your-resend-api-key
+NEWS_DISPATCH_TIME=09:00          # HH:MM en 24h
+DATABASE_URL=postgres://user:password@db:5432/agora_db
 
-# APIs externas
-GOOGLE_API_KEY=tu_google_gemini_api_key
-RESEND_API_KEY=tu_resend_api_key
-
-# Configuración de envío
-SEND_HOUR=8
-TZ=America/Bogota
-
-# URLs (para desarrollo local)
-BACKEND_URL=http://localhost:3000
-FRONTEND_URL=http://localhost
 ```
 
 ### 3. Ejecutar con Docker (Recomendado)
@@ -211,6 +199,7 @@ ngrok http 80
 
 - **Desarrollador Principal**: [@jul-cesar](https://github.com/jul-cesar)
 - **Desarrollador**: [@aks-alx](https://github.com/aks-alx)
+- **Desarrollador**: [@vanguardfisherman](https://github.com/vanguardfisherman)
 
 ---
 

@@ -27,6 +27,12 @@ Inspirado en la **plaza pública de la antigua Grecia**, Ágora busca ser un esp
 - **Tailwind CSS**: Diseño responsive y atractivo
 - **Animaciones**: Transiciones suaves con Framer Motion
 - **Componentes UI**: Interfaz consistente con Radix UI
+- **Nginx**: Servidor web optimizado para servir el frontend en producción
+
+### 🌐 Acceso y Despliegue
+- **Docker Compose**: Orquestación completa de servicios
+- **ngrok**: Túnel seguro para acceso externo desde internet
+- **Configuración flexible**: Fácil adaptación para desarrollo y producción
 
 ## 🛠️ Stack Tecnológico
 
@@ -51,7 +57,8 @@ Inspirado en la **plaza pública de la antigua Grecia**, Ágora busca ser un esp
 ### DevOps
 - **[Docker](https://www.docker.com/)**: Contenedorización
 - **[Docker Compose](https://docs.docker.com/compose/)**: Orquestación de servicios
-- **[Nginx](https://www.nginx.com/)**: Servidor web para frontend
+- **[Nginx](https://www.nginx.com/)**: Servidor web para servir el frontend en producción
+- **[ngrok](https://ngrok.com/)**: Túnel seguro para acceso externo a la aplicación
 
 ## 🚀 Instalación y Configuración
 
@@ -115,6 +122,27 @@ cd agora-front
 pnpm install
 pnpm run dev      # Servidor en http://localhost:5173
 ```
+
+## 🌐 Acceso Externo con ngrok
+
+Para permitir que otras personas accedan a tu aplicación desde internet, puedes usar **ngrok** para crear un túnel seguro:
+
+### 1. Instalar ngrok
+```bash
+# Descargar desde https://ngrok.com/download
+# O usando chocolatey en Windows:
+choco install ngrok
+
+# O usando npm:
+npm install -g ngrok
+```
+
+### 2. Exponer el Frontend (Puerto 80)
+```bash
+# El frontend se sirve a través de nginx en el puerto 80
+ngrok http 80
+```
+> **Nota**: El frontend utiliza **nginx** como servidor web en producción, configurado para servir los archivos estáticos optimizados y manejar el routing de React.
 
 ## 📡 API Endpoints
 
